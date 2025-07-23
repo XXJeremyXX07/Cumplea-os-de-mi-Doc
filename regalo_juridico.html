@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>¡Feliz Cumpleaños Dr. Miguel Arturo Galagarza Terán!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --gold: #FFD700;
+      --gold-dark: #CDA434;
+      --blue-dark: #141E30;
+      --blue: #243B55;
+      --star: #FFFACD;
+      --mensaje-bg: #32486b;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: radial-gradient(circle at 50% 40%, #21385b 50%, #141E30 100%);
+      color: #fff;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .stars {
+      position: fixed;
+      width: 100vw; height: 100vh;
+      z-index: 0;
+      top: 0; left: 0;
+      pointer-events: none;
+    }
+    .star {
+      position: absolute;
+      background: var(--star);
+      border-radius: 50%;
+      opacity: .8;
+      box-shadow: 0 0 12px #fff;
+      animation: twinkle 2.2s infinite linear;
+    }
+    @keyframes twinkle { 0%,100% { opacity: 0.7; } 50% { opacity: 1; } }
+    #preloader {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: radial-gradient(ellipse at center, #0f2027, #203a43, #243B55 90%);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1.2s;
+    }
+    #preloader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .galaxy-loader {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .galaxy {
+      position: absolute;
+      width: 180px; height: 180px;
+      border-radius: 50%;
+      border: 3px dashed var(--gold);
+      box-shadow: 0 0 60px 10px var(--gold-dark) inset;
+      animation: spin-galaxy 5s linear infinite;
+      filter: blur(1px);
+    }
+    @keyframes spin-galaxy { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }
+    .justice-icon {
+      font-size: 3.5rem;
+      filter: drop-shadow(0 0 18px var(--gold));
+      animation: float-icon 2.4s infinite ease-in-out;
+      z-index: 2;
+    }
+    @keyframes float-icon { 0%,100% { transform: translateY(0);} 50% { transform: translateY(-18px);} }
+    .loader-text {
+      font-size: 1.4rem;
+      color: var(--star);
+      text-align: center;
+      font-weight: 500;
+      letter-spacing: 1px;
+      line-height: 1.5;
+      text-shadow: 0 0 16px var(--gold-dark);
+      margin: 0 auto;
+      max-width: 80vw;
+    }
+    .container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      width: 100vw;
+    }
+    .titulo {
+      margin-top: 1.2rem;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      text-shadow: 0 2px 18px var(--gold-dark), 0 1px 2px #fff;
+      letter-spacing: 2px;
+      padding: 0 1rem;
+      animation: glow 2.6s infinite alternate;
+    }
+    @keyframes glow { 0% {text-shadow: 0 2px 18px var(--gold-dark), 0 1px 2px #fff;} 100% {text-shadow: 0 0 40px var(--gold), 0 1px 2px #fff;} }
+    .subtitulo {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--star);
+      margin-bottom: 1.1rem;
+      padding: 0 1rem;
+    }
+    .foto-doctor-container {
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      margin: 1.5rem auto 0.8rem auto;
+      overflow: hidden;
+      box-shadow: 0 0 22px var(--gold-dark), 0 0 50px var(--gold) inset;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .foto-doctor {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      background: #eee;
+    }
+    .derecho-animacion {
+      width: 220px; height: 160px;
+      margin: 1.2rem auto 1rem auto;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 2;
+    }
+    .balanza-svg {
+      width: 180px; height: 130px;
+      filter: drop-shadow(0 0 18px var(--gold-dark));
+      z-index: 2;
+      margin: 0 auto;
+      display: block;
+    }
+    .barra, .base, .plato {
+      stroke: var(--gold-dark);
+      stroke-width: 2;
+      filter: drop-shadow(0 0 8px var(--gold-dark));
+    }
+    .barra { fill: var(--gold);}
+    .base { fill: var(--gold-dark);}
+    .barra-top { fill: var(--blue); stroke: var(--blue-dark); stroke-width: 2.5;}
+    .plato {
+      fill: var(--gold);
+      filter: drop-shadow(0 0 18px var(--gold));
+      animation: balanceo 2.7s infinite cubic-bezier(.68,-0.55,.27,1.55);
+      transform-origin: center top;
+    }
+    .plato.left { animation-delay: .6s;}
+    @keyframes balanceo {0%,100%{transform:rotate(-14deg);} 50%{transform:rotate(13deg);}}
+    .libros {
+      display: flex;
+      gap: 12px;
+      margin-top: 8px;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+    }
+    .libro {
+      width: 32px; height: 44px;
+      border-radius: 6px 6px 2px 2px;
+      box-shadow: 0 2px 12px var(--gold-dark), 0 2px 18px #00000049;
+      animation: saltar 2.2s infinite;
+      border: 2px solid var(--gold-dark);
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+    }
+    .libro:nth-child(1) { background: linear-gradient(135deg,var(--gold) 70%,var(--star) 100%); animation-delay: .2s;}
+    .libro:nth-child(2) { background: linear-gradient(135deg,var(--blue) 65%,#3b5998 100%); animation-delay: .5s;}
+    .libro:nth-child(3) { background: linear-gradient(135deg,var(--blue-dark) 80%,var(--gold-dark) 100%); animation-delay: .8s;}
+    @keyframes saltar {0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);}}
+    .mensaje {
+      background: var(--mensaje-bg, #32486b);
+      border-radius: 18px;
+      box-shadow: 0 6px 32px 0 #28374760;
+      padding: 1.6rem 1rem 1.2rem 1rem;
+      max-width: 520px;
+      width: 92vw;
+      margin: 1.3rem auto 2.2rem auto;
+      color: var(--star);
+      font-family: 'Georgia', serif;
+      text-align: center;
+      font-size: 1.08rem;
+      z-index: 2;
+      position: relative;
+    }
+    .mensaje .titulo-mensaje {
+      color: var(--gold);
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: .8rem;
+      letter-spacing: 1px;
+    }
+    .firma {
+      margin-top: 1.5rem;
+      font-size: 1rem;
+      font-family: 'Brush Script MT', cursive;
+      color: var(--gold);
+      text-align: right;
+    }
+    footer {
+      margin-top: auto;
+      color: #c4c4c4;
+      font-size: 0.95rem;
+      opacity: 0.8;
+      text-align: center;
+      padding-bottom: .9rem;
+    }
+    @media (max-width: 600px) {
+      .titulo { font-size: 1.25rem; }
+      .subtitulo { font-size: .95rem;}
+      .foto-doctor-container { width: 100px; height: 100px;}
+      .derecho-animacion { width: 95vw; height: 110px;}
+      .balanza-svg { width: 100px; height: 80px;}
+      .libro { width: 18px; height: 28px;}
+      .mensaje { padding: .9rem .2rem; font-size: 0.97rem;}
+      .firma { font-size: .95rem;}
+    }
+  </style>
+</head>
+<body>
+  <!-- Pantalla de carga -->
+  <div id="preloader">
+    <div class="galaxy-loader">
+      <div class="galaxy"></div>
+      <span class="justice-icon">⚖️</span>
+    </div>
+    <div class="loader-text">
+      ¡Hoy celebramos el cumpleaños<br>
+      del Dr. Miguel Arturo Galagarza Terán!<br>
+      <span style="color:var(--gold); font-size:1.2em;">Invocando Sabiduría Universal...</span>
+    </div>
+  </div>
+  <!-- Estrellas fondo universo -->
+  <div class="stars" id="stars"></div>
+  <div class="container" id="main-content" style="display:none;">
+    <div class="titulo">
+      Dr. Miguel Arturo Galagarza Terán
+    </div>
+    <div class="subtitulo">
+      Ejemplo de Sabiduría, Justicia y Humanidad entre las estrellas del universo
+    </div>
+    <div class="foto-doctor-container">
+      <img class="foto-doctor" src="1.png" alt="Foto del Dr. Miguel Arturo Galagarza Terán">
+    </div>
+    <div class="derecho-animacion">
+      <svg class="balanza-svg" viewBox="0 0 250 220">
+        <defs>
+          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FFD700"/>
+            <stop offset="100%" stop-color="#CDA434"/>
+          </linearGradient>
+          <linearGradient id="blueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#243B55"/>
+            <stop offset="100%" stop-color="#141E30"/>
+          </linearGradient>
+        </defs>
+        <rect class="base" x="95" y="185" width="60" height="25" rx="9"/>
+        <rect class="barra" x="119" y="60" width="12" height="124" rx="6"/>
+        <rect class="barra-top" x="65" y="75" width="120" height="12" rx="6"/>
+        <ellipse class="plato left" cx="83" cy="145" rx="30" ry="10"/>
+        <ellipse class="plato right" cx="167" cy="145" rx="30" ry="10"/>
+        <line x1="83" y1="81" x2="83" y2="145" stroke="#CDA434" stroke-width="3"/>
+        <line x1="167" y1="81" x2="167" y2="145" stroke="#CDA434" stroke-width="3"/>
+        <circle cx="125" cy="66" r="12" fill="url(#goldGrad)" stroke="#CDA434" stroke-width="3"/>
+      </svg>
+      <div class="libros">
+        <div class="libro"></div>
+        <div class="libro"></div>
+        <div class="libro"></div>
+      </div>
+    </div>
+    <div class="mensaje">
+      <div class="titulo-mensaje">¡Feliz cumpleaños, Doctor!</div>
+      Este homenaje brilla en el universo para quien ha sido un faro de sabiduría, justicia y bondad.<br>
+      Como las estrellas y las leyes, su guía ilumina nuestro camino.<br>
+      Usted es ejemplo de excelencia profesional y humanidad.<br><br>
+      Gracias por guiarnos con honestidad, fortaleza y generosidad.<br>
+      Que reciba el reconocimiento y la felicidad que ha entregado.<br>
+      <div class="firma">
+        Con todo mi cariño y admiración,<br>
+        Jeremy
+      </div>
+    </div>
+    <footer>
+      Creado con aprecio y gratitud por Jeremy &mdash; Estudio Jurídico
+    </footer>
+  </div>
+  <script>
+    // Estrellas animadas fondo universo moderno
+    function crearEstrellas(num) {
+      const stars = document.getElementById('stars');
+      stars.innerHTML = '';
+      for(let i = 0; i < num; i++){
+        const star = document.createElement('div');
+        star.className = 'star';
+        let size = (Math.random()*2+1.5);
+        star.style.width = star.style.height = size+'px';
+        star.style.top = (Math.random()*100)+'vh';
+        star.style.left = (Math.random()*100)+'vw';
+        star.style.opacity = (Math.random()*0.5+0.5);
+        star.style.animationDelay = (Math.random()*2)+'s';
+        // Parpadeo con color dorado
+        if(Math.random()>0.7){
+          star.style.background = '#FFD700';
+          star.style.boxShadow = '0 0 16px #FFD700';
+        }
+        stars.appendChild(star);
+      }
+    }
+    crearEstrellas(85);
+
+    // Mostrar preloader y luego contenido principal
+    window.onload = function() {
+      setTimeout(function() {
+        document.getElementById("preloader").classList.add("hide");
+        setTimeout(function() {
+          document.getElementById("main-content").style.display = "flex";
+        }, 800);
+      }, 2200);
+    };
+  </script>
+</body>
+</html>
